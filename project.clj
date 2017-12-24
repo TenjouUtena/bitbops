@@ -5,4 +5,12 @@
             :url  "http://www.eclipse.org/legal/epl-v10.html"}
 
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [reagent "0.8.0-alpha2"]])
+                 [org.clojure/clojurescript "1.9.946"]
+                 [reagent "0.8.0-alpha2"]
+                 [org.clojure/core.async "0.3.465"]
+                 [http-kit "2.2.0"]
+                 ]
+  :plugin [[lein-cljsbuild "1.1.7"]]
+  :cljsbu
+  :main bitbops.core
+  )

@@ -1,6 +1,14 @@
-(ns bitbops.core)
+(ns bitbops.core
+   )
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+
+(require 'bitbops.game.game)
+(require 'clojure.core.async)
+
+(refer 'bitbops.game.game)
+(refer 'clojure.core.async :only ['go '<! 'timeout 'chan])
+
+
+
+
+

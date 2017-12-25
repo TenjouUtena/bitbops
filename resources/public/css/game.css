@@ -1,0 +1,11 @@
+
+
+.entity {
+    height: 15px;
+    width: 15px;
+    background-color: aqua;
+    display: block;
+    position: relative;
+}
+
+

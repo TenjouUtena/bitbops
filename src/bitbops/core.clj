@@ -1,14 +1,9 @@
 (ns bitbops.core
-   )
-
-
-(require 'bitbops.game.game)
-(require 'clojure.core.async)
-
-(refer 'bitbops.game.game)
-(refer 'clojure.core.async :only ['go '<! 'timeout 'chan])
+  (:require [bitbops.web.web :refer [app]]
+            [org.httpkit.server :refer [run-server]]))
 
 
 
-
-
+(defn -main [& args]
+  (run-server app {:port 8080})
+  (println "It's up!"))

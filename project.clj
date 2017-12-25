@@ -9,8 +9,17 @@
                  [reagent "0.8.0-alpha2"]
                  [org.clojure/core.async "0.3.465"]
                  [http-kit "2.2.0"]
+                 [compojure "1.6.0"]
+                 [jarohen/chord "0.8.1"]
                  ]
-  :plugin [[lein-cljsbuild "1.1.7"]]
-  :cljsbu
+  :plugins [[lein-cljsbuild "1.1.7"]]
+  :cljsbuild {
+                 :builds [{
+                  :source-paths ["src"]
+                  :compiler {
+                     :output-to "target/classes/public/js/main.js"
+                     :optimizations :whitespace
+                     :pretty-print true}}]}
   :main bitbops.core
+  :jvm-opts ["--add-modules" "java.xml.bind"]
   )

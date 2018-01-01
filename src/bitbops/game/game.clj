@@ -1,5 +1,5 @@
 (ns bitbops.game.game
-  (:require [clojure.core.async :refer [>! go]]))
+  (:require [clojure.core.async :refer [>! go take!]]))
 
 
 (defn newSampEntity [num]
@@ -19,10 +19,10 @@
         newy (+ y (* (Math/cos face) vel))
         ]
     (if (or
-         (< newx 0)
-         (< newy 0)
-         (> newx 1000)
-         (> newy 1000)
+         (< newx -500)
+         (< newy -500)
+         (> newx 500)
+         (> newy 500)
          )
       (assoc ent :face (rand (* Math/PI 2)))
       (-> ent
@@ -35,6 +35,10 @@
 
 (def game (atom nil))
 
+(defn doinput [data]
+  (cond (get-in data [:message :quit])
+    (reset! game (assoc @game :quit true))))
+
 (defn gloop [chan]
   (do
     (reset! game (assoc {} :entities (map newSampEntity (range 6))))
@@ -43,9 +47,11 @@
           [f (future (tick @game))
            t (future (Thread/sleep 150))]
         (reset! game @f)
+        (take! chan doinput)
         @t
+
         (go (>! chan @game))
-        (if (< c 1000)
+        (if-not (:quit @game)
           (recur (inc c))
           @game)
         ))))
